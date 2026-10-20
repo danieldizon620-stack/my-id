@@ -1,5 +1,5 @@
 
-name: Build MY ID APK
+name: Build MY ID Android APK
 
 on:
   workflow_dispatch:
@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source
+      - name: Checkout MY ID
         uses: actions/checkout@v4
 
       - name: Set up Java 17
@@ -23,19 +23,23 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Build APK
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+
+      - name: Build MY ID APK
         run: |
           if [ -f gradlew ]; then
             chmod +x gradlew
             ./gradlew assembleDebug --no-daemon
           else
-            echo "Gradle wrapper missing"
-            exit 1
+            gradle assembleDebug --no-daemon
           fi
 
-      - name: Upload MY ID APK
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: MY_ID_APK
+          name: MY_ID_Android_APK
           path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
