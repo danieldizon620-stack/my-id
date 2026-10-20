@@ -1,22 +1,20 @@
 
-name: Build MY ID Android APK
+name: Build MY ID APK
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
+  push:
+    branches: [main]
 
 permissions:
   contents: read
 
 jobs:
   build:
-    name: Build Android APK
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout MY ID source
+      - name: Checkout source
         uses: actions/checkout@v4
 
       - name: Set up Java 17
@@ -24,33 +22,20 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-          cache: gradle
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install Android SDK packages
+      - name: Build APK
         run: |
-          sdkmanager "platform-tools" \
-            "platforms;android-35" \
-            "build-tools;35.0.0"
-
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-
-      - name: Build MY ID APK
-        run: |
-          if [ -f ./gradlew ]; then
-            chmod +x ./gradlew
-            ./gradlew :app:assembleDebug --no-daemon
+          if [ -f gradlew ]; then
+            chmod +x gradlew
+            ./gradlew assembleDebug --no-daemon
           else
-            gradle :app:assembleDebug --no-daemon
+            echo "Gradle wrapper missing"
+            exit 1
           fi
 
-      - name: Upload APK
+      - name: Upload MY ID APK
         uses: actions/upload-artifact@v4
         with:
-          name: MY_ID_Android_APK
+          name: MY_ID_APK
           path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
-          retention-days: 30
