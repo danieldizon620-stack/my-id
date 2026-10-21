@@ -1,23 +1,16 @@
-MY ID Android v5.3 — APK BUILD SOURCE
-=====================================
-This Android WebView app opens https://my-id.alwaysdata.net/
-and displays the live MY ID website. To see v5.3 (immediate logo and
-4-second animated boot), deploy MY ID v5.3 on the server first.
+MY ID v5.5 — Android APK Build Project
 
-THIS FILE IS NOT A COMPILED APK. Android SDK/Gradle are not available
-in this environment.
+This ZIP contains Android source and a GitHub Actions workflow. It is NOT a compiled APK.
+The app opens https://my-id.alwaysdata.net/ and uses the live website. Deploy the
+MY ID v5.5 PHP website update to display the 10% mobile top offset.
 
-BUILD WITH GITHUB ACTIONS:
-1. Extract this ZIP to a folder.
-2. Upload all contents (including hidden .github folder) to the root
-   of your GitHub repository on the main branch.
-3. GitHub > Actions > Build MY-ID APK > Run workflow.
-4. Wait for a successful build, download artifact MY_ID_v5_3_APK.
-5. Unzip artifact and install app-debug.apk on Android.
+To compile using GitHub:
+1. Extract this ZIP and upload all its contents, including .github/, to your GitHub repository's main branch.
+2. Open GitHub > Actions > Build MY-ID APK > Run workflow.
+3. Wait for the successful build and download artifact MY_ID_v5_5_APK.
+4. Extract app-debug.apk and install it on your Android device.
 
-Or open the project in Android Studio and Build > Build APK(s).
-This is a debug-signed APK, not a Play Store release.
-Requires internet access. The app does not bundle the PHP website.
-If the website returns 403 Forbidden, the app will also show 403:
-restore website access and ensure index.php is in the correct document root.
-Do not replace your private server database, encryption key, or encrypted IDs.
+You can also open the project in Android Studio and select Build > Build APK(s).
+This is a debug APK, not a Play Store release. Requires internet access.
+A server-side 403 Forbidden error will also appear in the Android app.
+Do not overwrite or delete your server's vault.sqlite, secret.key, or encrypted documents.
