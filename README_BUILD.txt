@@ -1,20 +1,27 @@
-MY ID Android App - Android Studio source project
+MY-ID Android App v3.0
+======================
+A WebView Android application for https://my-id.alwaysdata.net/
+Includes the MY-ID blue/teal logo as launcher icon.
 
-This is a WebView wrapper for https://my-id.alwaysdata.net/.
-It does not include the PHP backend and does not work offline.
+BUILD APK USING GITHUB:
+1. Create a GitHub repository, e.g. my-id-android.
+2. Upload the CONTENTS of this folder to the repository ROOT:
+   app/, .github/, build.gradle, settings.gradle, gradle.properties, README_BUILD.txt
+   (Do NOT upload the containing folder itself.)
+3. Go to Actions > Build MY-ID APK > Run workflow.
+4. After a successful build, open the run's Artifacts and download MY_ID_v3_0_APK.
+5. Extract artifact ZIP to obtain app-debug.apk, then install on Android.
 
-Build an APK on Windows:
-1. Install Android Studio from https://developer.android.com/studio
-2. Open the MY_ID_Android_App folder as a project.
-3. Allow Android Studio to download Gradle and Android SDK components.
-4. Select Build > Build Bundle(s) / APK(s) > Build APK(s).
-5. Find the APK under app/build/outputs/apk/debug/app-debug.apk.
-6. Transfer the APK to your Android phone and install it.
+BUILD USING ANDROID STUDIO:
+Open this folder as a project; sync Gradle; Build > Build APK(s).
+Java 17, Android SDK 35 and Gradle 8.9 are required.
 
-Current limitations:
-- This source project has not been compiled/tested here (Android SDK unavailable).
-- The file picker supports Android's standard document/photo selection; direct camera capture may depend on the device/browser and requires further native integration.
-- Authenticated downloads are not implemented in the wrapper; open the site in Chrome to download files.
-- MY ID server must be online, HTTPS-enabled and functional.
-- Do not store real identity documents until the server is security reviewed.
-- For production release, configure signing and app distribution appropriately.
+SECURITY:
+- The app only allows the HTTPS MY-ID site in the WebView.
+- Links to other hosts open externally.
+- SSL errors are blocked.
+- Credentials and documents stay on the existing website/server.
+- This is a DEBUG APK for testing, not a signed production release.
+- Downloading protected documents from inside the app is not yet implemented.
+- Camera/photo picker behavior depends on Android WebView and installed camera apps.
+- Test on an actual Android phone before using real IDs.
